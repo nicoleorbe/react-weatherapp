@@ -1,0 +1,14 @@
+.forecast {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.forecast-date {
+  text-transform: uppercase;
+}
+
+.forecast-image {
+  width: 50px;
+  height: 50px;
+  object-fit: scale-down;
+}

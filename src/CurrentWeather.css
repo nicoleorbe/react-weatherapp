@@ -1,0 +1,41 @@
+.current-city {
+  text-transform: capitalize;
+}
+
+.img-current-temp {
+  width: 100px;
+}
+
+.current-temp {
+  font-size: 72px;
+  line-height: 70px !important;
+}
+
+.degree-symbol {
+  font-size: 0.95rem;
+}
+
+.degree-symbol a {
+  text-decoration: none;
+  color: var(--bs-heading-color, inherit);
+}
+
+.active {
+  font-weight: 500;
+}
+
+.weather-title {
+  margin-bottom: 0;
+  font-size: 34px;
+}
+
+.current-datetime {
+  margin-bottom: 5px;
+  margin-top: 0;
+  line-height: 15px;
+}
+
+.current-weather {
+  text-transform: capitalize;
+  font-weight: 500;
+}
