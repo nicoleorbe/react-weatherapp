@@ -18,18 +18,6 @@
   margin-bottom: 50px !important;
   max-width: 800px !important;
 }
-.App :root {
-  --dark-turquoise: #4897a8;
-  --med-turquoise: #59b4c9;
-  --light-turquoise: #7dc4d4;
-  --sun-yellow: #fddc54;
-  --sun-orange: #e98d22;
-  --button-box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, 0.2);
-  --button-hover-transiton: all 200ms ease-in-out;
-  --button-border-radius: 20px;
-  --button-dt-shadow: 2px 2px 2px 1px rgba(72, 151, 168, 0.3);
-  --shadow: 0px 0px 20px 6px rgba(72, 151, 168, 0.5);
-}
 
 footer {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -53,20 +41,20 @@ footer span {
   color: #ff3cac;
 }
 
-.span-footer-name {
+.brand-name {
   background: linear-gradient(-225deg, #ff057c 0%, #8d0b93 50%, #321575 100%);
   color: white;
   border-radius: 4px;
   padding: 3px;
 }
 
-.span-footer-name:hover {
+.brand-name:hover {
   transform: scale(1.1);
 }
-.span-footer-coffee {
+.footer-icon {
   font-size: larger;
 }
 
-.span-footer-coffee:hover {
+.footer-icon:hover {
   transform: scale(1.3);
 }

@@ -7,9 +7,8 @@ function App() {
       <footer className="footer">
         <p>
           {" "}
-          Built by <span className="span-footer-name">Nicole Orbe</span> and
-          lots of
-          <span className="span-footer-coffee" role="img" aria-label="coffee">
+          Built by <span className="brand-name">Nicole Orbe</span> and lots of
+          <span className="footer-icon" role="img" aria-label="coffee">
             ☕
           </span>{" "}
           and is{" "}
