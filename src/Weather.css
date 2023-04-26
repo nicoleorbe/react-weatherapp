@@ -1,0 +1,96 @@
+:root {
+  --dark-blue: #209dd7;
+  --light-blue: #2dbceb;
+  --orange: #faa91d;
+  --yellow: #fbe049;
+}
+
+.Weather {
+  font-family: "Nunito", sans-serif;
+  background-color: white;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.Weather h1 {
+  font-weight: 800;
+  color: #252425;
+}
+
+.Weather ul {
+  list-style: none;
+  padding: none;
+  margin: 0;
+}
+
+.Weather .current-temp ul {
+  text-align: center;
+}
+
+.Weather .weather-details ul {
+  text-align: right;
+}
+
+.Weather .current-date {
+  text-align: right;
+  font-size: 22px;
+}
+
+.Weather .form-control {
+  border: none;
+  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.2);
+  text-transform: capitalize;
+}
+
+.Weather #button-find {
+  text-align: right;
+}
+
+.Weather #button-search,
+.Weather #button-find {
+  background-color: var(--dark-blue);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-weight: 600;
+  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.Weather #button-search:hover,
+.Weather #button-find:hover {
+  background-color: var(--orange);
+  color: var(--dark-blue);
+}
+
+.Weather .feels-like {
+  font-size: 22px;
+}
+
+.weather-icon {
+  max-width: 175px;
+}
+
+.forecast .forecast-icon {
+  max-width: 75px;
+}
+
+.Weather .temperature {
+  font-size: 96px;
+}
+
+.Weather .forecast-temperature {
+  font-size: 18px;
+}
+
+.Weather .forecast {
+  font-size: 12px;
+}
+
+.Weather .forecast-date {
+  text-transform: uppercase;
+  font-size: 14px;
+}

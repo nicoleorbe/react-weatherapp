@@ -1,9 +1,13 @@
 import "./App.css";
+import Weather from "./Weather.js";
 
 function App() {
   return (
     <div className="App">
-      {/* footer */}
+      <div className="container">
+        <Weather />
+        {/* footer */}
+      </div>
       <footer className="footer">
         <p>
           {" "}
