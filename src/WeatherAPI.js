@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
-import WeatherCurrent from "./WeatherCurrent";
-import WeatherForecast from "./WeatherForecast";
-//import image from "./images/cloud.png";
+import image from "./images/cloud.png";
 
-export default function Search(props) {
+export default function Weather(props) {
   // let [city, setCity] = useState(props.city);
   let [city, setCity] = useState(null);
   let [temperature, setTemperature] = useState(null);
 
   function showTemperature(response) {
+    console.log(response);
+    console.log(response.data.name);
     setTemperature({
       temperature: Math.round(response.data.main.temp),
       feels: Math.round(response.data.main.feels_like),
       max: Math.round(response.data.main.temp_max),
       min: Math.round(response.data.main.temp_min),
-      description: response.data.weather[0].description,
+      description: response.data.weather[0].main,
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
       clouds: response.data.clouds.all,
@@ -24,7 +24,6 @@ export default function Search(props) {
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
   }
-  console.log(temperature);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -38,6 +37,7 @@ export default function Search(props) {
   function search() {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=91f6bf18ce54b4e6a35e4e6af54b2317`;
     axios.get(url).then(showTemperature);
+    console.log(url);
   }
 
   function showPosition(position) {
@@ -48,14 +48,14 @@ export default function Search(props) {
     if (latitude) {
       let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=91f6bf18ce54b4e6a35e4e6af54b2317`;
       axios.get(url).then((data) => {
-        setCity(data.data.name);
-        search();
-        console.log(data);
+        // search(data.coord.name);
+        console.log(url);
       });
     } else search("Dallas");
   }
 
   function getCurrentLocation() {
+    // Check if geolocation is supported by the browser
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -121,10 +121,7 @@ export default function Search(props) {
             </button>
           </div>
         </div>
-        {/* row 2 - temperature*/}
-        <WeatherCurrent data={temperature} />
-
-        {/* <div className="row align-items-center">
+        <div className="row align-items-center">
           <div className="col-md-6 border">
             <h1 className="border m-0">{city}</h1>
           </div>
@@ -137,7 +134,7 @@ export default function Search(props) {
         <div className="row align-items-center">
           <div className="col-md-4 border icon">
             <img
-              src=""
+              src={image}
               alt="Current Weather"
               className="weather-icon img-fluid"
             />
@@ -168,15 +165,12 @@ export default function Search(props) {
               <li>Wind: {temperature.wind} mph</li>
             </ul>
           </div>
-        </div> */}
-
-        {/*row 3 forecast */}
-        <WeatherForecast data={temperature} />
-        {/* <div className="forecast row mt-4 shadow text-center align-items-center">
+        </div>
+        <div className="forecast row mt-4 shadow text-center align-items-center">
           <span className="forecast-date">
             <strong>Mon</strong>
           </span>
-          <img src="" alt="Forecast" className="forecast-icon img-fluid" />
+          <img src={image} alt="Forecast" className="forecast-icon img-fluid" />
 
           <ul className="text-center">
             <li className="forecast-temperature border">
@@ -189,7 +183,7 @@ export default function Search(props) {
               <span className="forecast-temp-low"> 12°</span>
             </li>
           </ul>
-        </div> */}
+        </div>
       </div>
     );
   } else {

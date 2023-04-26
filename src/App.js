@@ -5,8 +5,7 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <Weather />
-        {/* footer */}
+        <Weather city="Dallas" />
       </div>
       <footer className="footer">
         <p>

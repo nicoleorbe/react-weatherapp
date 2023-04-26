@@ -63,7 +63,6 @@
 .Weather #button-search:hover,
 .Weather #button-find:hover {
   background-color: var(--orange);
-  color: var(--dark-blue);
 }
 
 .Weather .feels-like {
@@ -80,6 +79,11 @@
 
 .Weather .temperature {
   font-size: 96px;
+}
+
+.Weather .description,
+.city {
+  text-transform: capitalize;
 }
 
 .Weather .forecast-temperature {
