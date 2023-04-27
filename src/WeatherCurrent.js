@@ -1,5 +1,6 @@
 import React from "react";
 import "./Weather.css";
+import FormatDate from "./FormatDate";
 
 export default function WeatherCurrent(props) {
   return (
@@ -10,7 +11,9 @@ export default function WeatherCurrent(props) {
         </div>
         <div className="col-md-6 border">
           <ul>
-            <li className="current-date border"> </li>
+            <li className="current-date border">
+              {/* <FormatDate date={props.data.date} /> */}
+            </li>
           </ul>
         </div>
       </div>

@@ -3,11 +3,9 @@ import axios from "axios";
 import "./Weather.css";
 import WeatherCurrent from "./WeatherCurrent";
 import WeatherForecast from "./WeatherForecast";
-//import image from "./images/cloud.png";
 
 export default function Search(props) {
-  // let [city, setCity] = useState(props.city);
-  let [city, setCity] = useState(null);
+  let [city, setCity] = useState(props.city);
   let [temperature, setTemperature] = useState(null);
 
   function showTemperature(response) {
@@ -21,18 +19,10 @@ export default function Search(props) {
       wind: response.data.wind.speed,
       clouds: response.data.clouds.all,
       displayCity: response.data.name,
+      coordinates: response.data.coord,
+      //date: new Date(data.data.dt * 1000),
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
-  }
-  console.log(temperature);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    search();
-  }
-
-  function updateCity(event) {
-    setCity(event.target.value);
   }
 
   function search() {
@@ -42,17 +32,13 @@ export default function Search(props) {
 
   function showPosition(position) {
     const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log(latitude);
-
     if (latitude) {
-      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=91f6bf18ce54b4e6a35e4e6af54b2317`;
+      let url = `https://api.ipgeolocation.io/ipgeo?apiKey=e9d4cfe75eda49729ab3361d039e85a9`;
       axios.get(url).then((data) => {
-        setCity(data.data.name);
+        city = data.data.city;
         search();
-        console.log(data);
       });
-    } else search("Dallas");
+    } else search();
   }
 
   function getCurrentLocation() {
@@ -63,11 +49,26 @@ export default function Search(props) {
     }
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function updateCity(event) {
+    setCity(event.target.value);
+  }
+
+  function handleMyLocation(event) {
+    event.preventDefault();
+    getCurrentLocation();
+  }
+
   let form = (
     <div className="Weather mt-5">
       <div className="row mb-4">
         <div className="col-md-8">
-          <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleSubmit}> */}
+          <form>
             <div className="row">
               <div className="col-md-8">
                 <input
@@ -79,12 +80,27 @@ export default function Search(props) {
                 ></input>
               </div>
               <div className="col-md-4">
-                <button className="btn" type="submit" id="button-search">
+                <button
+                  className="btn"
+                  type="submit"
+                  onClick={handleSubmit}
+                  id="button-search"
+                >
                   Search
                 </button>
               </div>
             </div>
           </form>
+        </div>
+        <div className="col-md-4 border">
+          <button
+            className="btn border"
+            type="submit"
+            onClick={handleMyLocation}
+            id="button-find"
+          >
+            My location
+          </button>
         </div>
       </div>
     </div>
@@ -96,7 +112,8 @@ export default function Search(props) {
         <div className="row mb-4">
           <div className="col-md-8">
             {" "}
-            <form onSubmit={handleSubmit}>
+            <form>
+              {/* <form onSubmit={handleSubmit}> */}
               <div className="row">
                 <div className="col-md-8">
                   <input
@@ -108,7 +125,12 @@ export default function Search(props) {
                   ></input>
                 </div>
                 <div className="col-md-4">
-                  <button className="btn" type="submit" id="button-search">
+                  <button
+                    className="btn"
+                    type="submit"
+                    onClick={handleSubmit}
+                    id="button-search"
+                  >
                     Search
                   </button>
                 </div>
@@ -116,7 +138,12 @@ export default function Search(props) {
             </form>{" "}
           </div>
           <div className="col-md-4 border">
-            <button className="btn border" type="submit" id="button-find">
+            <button
+              className="btn border"
+              type="submit"
+              onClick={handleMyLocation}
+              id="button-find"
+            >
               My location
             </button>
           </div>
@@ -124,76 +151,13 @@ export default function Search(props) {
         {/* row 2 - temperature*/}
         <WeatherCurrent data={temperature} />
 
-        {/* <div className="row align-items-center">
-          <div className="col-md-6 border">
-            <h1 className="border m-0">{city}</h1>
-          </div>
-          <div className="col-md-6 border">
-            <ul>
-              <li className="current-date border"> </li>
-            </ul>
-          </div>
-        </div>
-        <div className="row align-items-center">
-          <div className="col-md-4 border icon">
-            <img
-              src=""
-              alt="Current Weather"
-              className="weather-icon img-fluid"
-            />
-          </div>
-          <div className="col-md-4 border text-center current-temp">
-            <ul>
-              <li className="temperature border">{temperature.temperature}°</li>
-              <li className="description border">{temperature.description}</li>
-              <li>
-                <span className="temp-high ">
-                  <strong> H</strong> {temperature.max}°
-                </span>
-                {"  "}
-                <span className="temp-low">
-                  {"  "}
-                  <strong>L</strong> {temperature.min}°
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div className="col-md-4 border weather-details">
-            <ul>
-              <li className="feels-like">
-                <strong> Feels Like: {temperature.feels}°</strong>
-              </li>
-              <li>Precipitation: 15%</li>
-              <li>Humidity: {temperature.humidity}%</li>
-              <li>Wind: {temperature.wind} mph</li>
-            </ul>
-          </div>
-        </div> */}
-
         {/*row 3 forecast */}
-        <WeatherForecast data={temperature} />
-        {/* <div className="forecast row mt-4 shadow text-center align-items-center">
-          <span className="forecast-date">
-            <strong>Mon</strong>
-          </span>
-          <img src="" alt="Forecast" className="forecast-icon img-fluid" />
-
-          <ul className="text-center">
-            <li className="forecast-temperature border">
-              {" "}
-              <strong> 19°</strong>
-            </li>
-            <li className="forecast-description border">Mostly Cloudy</li>
-            <li>
-              <span className="forecast-temp-high">24° /</span>{" "}
-              <span className="forecast-temp-low"> 12°</span>
-            </li>
-          </ul>
-        </div> */}
+        <WeatherForecast data={temperature.coordinates} />
       </div>
     );
   } else {
     getCurrentLocation();
+    //search();
     return form;
   }
 }
