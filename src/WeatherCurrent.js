@@ -1,18 +1,18 @@
 import React from "react";
+import FormatDate from "./FormattedDate";
 import "./Weather.css";
-import FormatDate from "./FormatDate";
 
 export default function WeatherCurrent(props) {
   return (
     <div className="WeatherCurrent">
       <div className="row align-items-center">
         <div className="col-md-6 border">
-          <h1 className="border m-0">{props.data.displayCity}</h1>
+          <h1 className="border m-0">{props.data.city}</h1>
         </div>
         <div className="col-md-6 border">
           <ul>
             <li className="current-date border">
-              {/* <FormatDate date={props.data.date} /> */}
+              <FormatDate date={props.data.date} />
             </li>
           </ul>
         </div>
@@ -46,7 +46,7 @@ export default function WeatherCurrent(props) {
             <li className="feels-like">
               <strong> Feels Like: {props.data.feels}°</strong>
             </li>
-            <li>Precipitation: 15%</li>
+            <li>Cloudiness: {props.data.cloud}%</li>
             <li>Humidity: {props.data.humidity}%</li>
             <li>Wind: {props.data.wind} mph</li>
           </ul>

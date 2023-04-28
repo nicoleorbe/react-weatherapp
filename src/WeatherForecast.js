@@ -1,33 +1,31 @@
-import React, { useState } from "react";
-import axios from "axios";
-
+import React, { useState, useEffect } from "react";
 import "./Weather.css";
+import axios from "axios";
+import WeatherForecastEach from "./WeatherForecastEach";
 
-export default function WeatherCurrent(props) {
+export default function WeatherForecast(props) {
+  let [loaded, setLoaded] = useState(false);
   let [forecast, setForecast] = useState(null);
 
-  function formatEpoch(timestamp) {
-    let date = new Date(timestamp * 1000);
+  useEffect(() => {
+    setLoaded(false);
+  }, [props.coordinates]);
 
-    let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    let weekday = weekdays[date.getDay()];
-
-    return `${weekday}`;
-  }
-
-  function handleForecast(response) {
+  function handleResponse(response) {
     setForecast(response.data.daily);
+    setLoaded(true);
   }
 
-  function search() {
-    let latitude = props.data.lat;
-    let longitude = props.data.lon;
-    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&units=imperial&appid=281450ec88936f4fa8ee9864682b49a0`;
-    axios.get(url).then(handleForecast);
+  function load() {
+    let apiKey = "281450ec88936f4fa8ee9864682b49a0";
+    let longitude = props.coordinates.lon;
+    let latitude = props.coordinates.lat;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+
+    axios.get(apiUrl).then(handleResponse);
   }
 
-  if (props.coordinates) {
+  if (loaded) {
     return (
       <div className="WeatherForecast">
         <div className="forecast row mt-4 shadow text-center align-items-center">
@@ -35,45 +33,19 @@ export default function WeatherCurrent(props) {
             if (index < 6) {
               return (
                 <div className="col" key={index}>
-                  <span className="forecast-date">
-                    <strong>${formatEpoch(dailyForecast.dt)}</strong>
-                  </span>
-                  <img
-                    src=""
-                    alt="Forecast"
-                    className="forecast-icon img-fluid"
-                  />
-
-                  <ul className="text-center">
-                    <li className="forecast-temperature border">
-                      {" "}
-                      <strong>{Math.round(dailyForecast.temp.day)}°</strong>
-                    </li>
-                    <li className="forecast-description border">
-                      {Math.round(dailyForecast.weather[index].description)}
-                    </li>
-                    <li>
-                      <span className="forecast-temp-high">
-                        {Math.round(dailyForecast.temp.max)}° /
-                      </span>{" "}
-                      <span className="forecast-temp-low">
-                        {" "}
-                        {Math.round(dailyForecast.temp.min)}°
-                      </span>
-                    </li>
-                  </ul>
+                  <WeatherForecastEach data={dailyForecast} />
                 </div>
               );
             } else {
               return null;
             }
           })}
-          ;
         </div>
       </div>
     );
   } else {
-    search();
+    load();
+
     return null;
   }
 }
