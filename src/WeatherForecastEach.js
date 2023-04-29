@@ -40,13 +40,8 @@ export default function WeatherForecastEach(props) {
           {props.data.weather[0].description}
         </div>
         <div>
-          <span className="forecast-temp-high">
-            {Math.round(props.data.temp.max)}° /
-          </span>{" "}
-          <span className="forecast-temp-low">
-            {" "}
-            {Math.round(props.data.temp.min)}°
-          </span>
+          <span className="forecast-temp-high">{maxTemperature()}° /</span>{" "}
+          <span className="forecast-temp-low"> {minTemperature()}°</span>
         </div>
       </div>
     </div>
