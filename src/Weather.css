@@ -77,8 +77,9 @@
   font-size: 22px;
 }
 
-.weather-icon {
-  max-width: 175px;
+.WeatherCurrent .weather-icon {
+  margin: 0 auto;
+  width: 150px;
 }
 
 .Weather .temperature {
@@ -89,21 +90,4 @@
 .Weather .description,
 .city {
   text-transform: capitalize;
-}
-
-.forecast .forecast-icon {
-  max-width: 75px;
-}
-
-.Weather .forecast-temperature {
-  font-size: 18px;
-}
-
-.Weather .forecast {
-  font-size: 12px;
-}
-
-.Weather .forecast-date {
-  text-transform: uppercase;
-  font-size: 14px;
 }

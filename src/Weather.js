@@ -23,6 +23,7 @@ export default function Search(props) {
       date: new Date(),
       //new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
+      mainWeather: response.data.weather[0].main,
       feels: Math.round(response.data.main.feels_like),
       wind: Math.round(response.data.wind.speed),
       windDirection: response.data.wind.deg,
@@ -78,7 +79,7 @@ export default function Search(props) {
     search();
     return (
       <div className="Weather mt-5">
-        <div class="loader"> {MyLoader()}</div>{" "}
+        <div className="loader"> {MyLoader()}</div>{" "}
       </div>
     );
   }

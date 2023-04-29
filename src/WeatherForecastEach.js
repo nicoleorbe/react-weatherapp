@@ -1,8 +1,8 @@
 import React from "react";
-import "./Weather.css";
+import "./WeatherForecastEach.css";
+import WeatherIcon from "./WeatherIcon";
 
 export default function WeatherForecastEach(props) {
-  console.log(props);
   function maxTemperature() {
     let temperature = Math.round(props.data.temp.max);
     return `${temperature}°`;
@@ -23,21 +23,23 @@ export default function WeatherForecastEach(props) {
   }
 
   return (
-    <div>
-      <span className="forecast-date">
+    <div className="forecast-wrapper shadow text-center">
+      <div className="forecast-date">
         <strong>{day()}</strong>
-      </span>
-      <img src="" alt="Forecast" className="forecast-icon img-fluid" />
-
-      <ul className="text-center">
-        <li className="forecast-temperature border">
+      </div>
+      <div className="day-icon text-center">
+        <WeatherIcon code={props.data.weather[0].main} />
+        {/* <img src="" alt="Forecast" className="forecast-icon img-fluid border" /> */}
+      </div>
+      <div className="weather-forecast-info text-center">
+        <div className="forecast-temperature">
           {" "}
           <strong>{Math.round(props.data.temp.day)}°</strong>
-        </li>
-        <li className="forecast-description border">
-          {Math.round(props.data.weather[0].description)}
-        </li>
-        <li>
+        </div>
+        <div className="forecast-description">
+          {props.data.weather[0].description}
+        </div>
+        <div>
           <span className="forecast-temp-high">
             {Math.round(props.data.temp.max)}° /
           </span>{" "}
@@ -45,8 +47,8 @@ export default function WeatherForecastEach(props) {
             {" "}
             {Math.round(props.data.temp.min)}°
           </span>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 }
