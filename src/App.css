@@ -9,15 +9,12 @@
   --button-border-radius: 20px;
   --button-dt-shadow: 2px 2px 2px 1px rgba(72, 151, 168, 0.3);
   --shadow: 0px 0px 20px 6px rgba(72, 151, 168, 0.5);
+  --bodyColor: "#000000";
 }
 
-/* .weather-container {
-  display: block !important;
-  margin: 0 auto !important;
-  margin-top: 50px !important;
-  margin-bottom: 50px !important;
-  max-width: 800px !important;
-} */
+body {
+  background-color: var(--bodyColor);
+}
 
 .App footer {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;

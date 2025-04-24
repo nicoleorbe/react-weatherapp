@@ -1,9 +1,13 @@
+import React, { useState } from "react";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Weather from "./Weather.js";
 
 function App() {
   return (
     <div className="App">
+      {/* <Background /> */}
       <div className="container">
         <Weather city="Dallas" />
       </div>

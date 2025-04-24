@@ -8,8 +8,6 @@ export default function FormattedDate(props) {
   let time = date.toLocaleString("en-US", timeOptions);
   let formattedDate = `${weekday}, ${time}`;
 
-  console.log(formattedDate);
-
   //   let days = [
   //     "Sunday",
   //     "Monday",
