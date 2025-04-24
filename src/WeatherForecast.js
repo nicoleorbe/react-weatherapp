@@ -4,48 +4,48 @@ import axios from "axios";
 import WeatherForecastEach from "./WeatherForecastEach";
 
 export default function WeatherForecast(props) {
-  let [loaded, setLoaded] = useState(false);
-  let [forecast, setForecast] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [forecast, setForecast] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoaded(false);
+    setError(null);
+
+    const apiKey = process.env.REACT_APP_API_KEY; // Use environment variable
+    const longitude = props.coordinates?.lon;
+    const latitude = props.coordinates?.lat;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=imperial`;
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setForecast(response.data.daily);
+        setLoaded(true);
+      })
+      .catch((err) => {
+        setError("Failed to load forecast data");
+        setLoaded(true); // Allow UI to render even if there's an error
+      });
   }, [props.coordinates]);
 
-  function handleResponse(response) {
-    setForecast(response.data.daily);
-    setLoaded(true);
+  if (!loaded) {
+    return <div>Loading...</div>; // Show loading indicator
   }
 
-  function load() {
-    let apiKey = "91f6bf18ce54b4e6a35e4e6af54b2317";
-    let longitude = props.coordinates.lon;
-    let latitude = props.coordinates.lat;
-    let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}&units=imperial`;
-
-    axios.get(apiUrl).then(handleResponse);
+  if (error) {
+    return <div>{error}</div>; // Show error message
   }
 
-  if (loaded) {
-    return (
-      <div className="WeatherForecast">
-        <div className="forecast row mt-4 text-center align-items-center">
-          {forecast.map(function (dailyForecast, index) {
-            if (index < 6) {
-              return (
-                <div className="col" key={index}>
-                  <WeatherForecastEach data={dailyForecast} />
-                </div>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </div>
+  return (
+    <div className="WeatherForecast">
+      <div className="forecast row mt-4 text-center align-items-center">
+        {forecast?.slice(0, 6).map((dailyForecast, index) => (
+          <div className="col" key={dailyForecast.dt || index}>
+            <WeatherForecastEach data={dailyForecast} />
+          </div>
+        ))}
       </div>
-    );
-  } else {
-    load();
-
-    return null;
-  }
+    </div>
+  );
 }
