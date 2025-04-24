@@ -12,7 +12,7 @@ export default function WeatherForecast(props) {
     setLoaded(false);
     setError(null);
 
-    const apiKey = process.env.REACT_APP_API_KEY; // Use environment variable
+    const apiKey = "91f6bf18ce54b4e6a35e4e6af54b2317"; // Use environment variable
     const longitude = props.coordinates?.lon;
     const latitude = props.coordinates?.lat;
     const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=imperial`;
